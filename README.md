@@ -26,7 +26,7 @@ Compatibility  Works on real hardware with
                Kega Fusion is not working due to an issue with broken DMA when CD support is active in emulation
                (*untested on my end)
 
-SourceROMs:    (CRC: 5c7e5ea6)
+SourceROMs:    (CRC: 5C7E5EA6)
 
 Date:          2021-01-23
 
