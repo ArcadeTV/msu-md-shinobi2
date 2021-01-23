@@ -1,0 +1,1 @@
+..\srecpatch.exe "ROMS\Revenge of Shinobi, The (W) (REV00) [patched][8M].bin" OUTPUT\out.md<srecfile.txt
