@@ -34,7 +34,8 @@ Category:      Romhack / Music
 Thanks:        RodrigoMacck (idea for hack), SCD (improvement hack), BillyTime! Games (jump hack),
                Dustin O'Dell (asm tutor), Krikzz (everdrive creator), Conn (mental coach)
 
-Soundpacks:    Arranged OST by coNsPirAcy83:  >> not yet released
+Soundpacks:    Arranged OST by coNsPirAcy83:  
+               >> https://www.mediafire.com/file/cxuub4cnspst94n/SoundPack_RevengeOfShinobi_coNsPirAcy83.bin/file
                
 Source:        https://github.com/ArcadeTV/msu-md-shinobi2
 
