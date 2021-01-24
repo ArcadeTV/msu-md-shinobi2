@@ -1,4 +1,4 @@
-PRODUCTION  set 0                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
+PRODUCTION  set 1                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
 CHEAT       set 1                           ; set to 1 for cheat enabled
 DEBUG_MENU  set 0                           ; set to 1 for debug menu enabled
 
