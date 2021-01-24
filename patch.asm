@@ -1,4 +1,4 @@
-PRODUCTION  set 1                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
+PRODUCTION  set 0                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
 CHEAT       set 1                           ; set to 1 for cheat enabled
 DEBUG_MENU  set 0                           ; set to 1 for debug menu enabled
 
@@ -114,182 +114,183 @@ msuHijack_SoundTest
         move.w  ($FF32).w,d0
         move.b  soundIDs(pc,d0.w),d0
         jsr     findAndPlayTrack
+        move.w  ($FF32).w,d0
         jmp     retFromHijack
 jmp_sub_9494
         jmp     sub_9494
         
 soundIDs:       
-        dc.b    $81
-        dc.b    $82
-        dc.b    $83
-        dc.b    $84
-        dc.b    $85
-        dc.b    $86
-        dc.b    $87
-        dc.b    $88
-        dc.b    $89
-        dc.b    $8A
-        dc.b    $8B
-        dc.b    $8C
-        dc.b    $8D
-        dc.b    $8E
-        dc.b    $8F
-        dc.b    $90
-        dc.b    $91
-        dc.b    $92
-        dc.b    $93
-        dc.b    $A0
-        dc.b    $A2
-        dc.b    $A3
-        dc.b    $A4
-        dc.b    $A5
-        dc.b    $A6
-        dc.b    $A7
-        dc.b    $A8
-        dc.b    $A9
-        dc.b    $AA
-        dc.b    $AB
-        dc.b    $AC
-        dc.b    $AD
-        dc.b    $AF
-        dc.b    $B0
-        dc.b    $B1
-        dc.b    $B2
-        dc.b    $B3
-        dc.b    $B4
-        dc.b    $B5
-        dc.b    $B6
-        dc.b    $B7
-        dc.b    $B8
-        dc.b    $B9
-        dc.b    $C0
-        dc.b    $C1
-        dc.b    $C2
-        dc.b    $C3
-        dc.b    $C4
-        dc.b    $CA
-        dc.b    $CB
-        dc.b    $CC
-        dc.b    $CD
-        dc.b    $CF
+        dc.b    $81 ; 00 ---------- first music item
+        dc.b    $82 ; 01
+        dc.b    $83 ; 02
+        dc.b    $84 ; 03
+        dc.b    $85 ; 04
+        dc.b    $86 ; 05
+        dc.b    $87 ; 06
+        dc.b    $88 ; 07
+        dc.b    $89 ; 08
+        dc.b    $8A ; 09
+        dc.b    $8B ; 0A
+        dc.b    $8C ; 0B
+        dc.b    $8D ; 0C
+        dc.b    $8E ; 0D
+        dc.b    $8F ; 0E
+        dc.b    $90 ; 0F
+        dc.b    $91 ; 10
+        dc.b    $92 ; 11
+        dc.b    $93 ; 12 ---------- last music item
+        dc.b    $A0 ; 13 ----------  first sfx item
+        dc.b    $A2 ; 14
+        dc.b    $A3 ; 15
+        dc.b    $A4 ; 16
+        dc.b    $A5 ; 17
+        dc.b    $A6 ; 18
+        dc.b    $A7 ; 19
+        dc.b    $A8 ; 1A
+        dc.b    $A9 ; 1B
+        dc.b    $AA ; 1C
+        dc.b    $AB ; 1D
+        dc.b    $AC ; 1E
+        dc.b    $AD ; 1F
+        dc.b    $AF ; 20
+        dc.b    $B0 ; 21
+        dc.b    $B1 ; 22
+        dc.b    $B2 ; 23
+        dc.b    $B3 ; 24
+        dc.b    $B4 ; 25
+        dc.b    $B5 ; 26
+        dc.b    $B6 ; 27
+        dc.b    $B7 ; 28
+        dc.b    $B8 ; 29
+        dc.b    $B9 ; 2A
+        dc.b    $C0 ; 2B
+        dc.b    $C1 ; 2C
+        dc.b    $C2 ; 2D
+        dc.b    $C3 ; 2E
+        dc.b    $C4 ; 2F
+        dc.b    $CA ; 30
+        dc.b    $CB ; 31
+        dc.b    $CC ; 32
+        dc.b    $CD ; 33
+        dc.b    $CF ; 34 -----------  last sfx item
         dc.b    0
         align   2
         
 findAndPlayTrack
-        cmp.b	#$81,d0					; The Shinobi           CBD8
+        cmp.b	#$81,d0					; The Shinobi           set@ $CBD8
         beq     play_track_1
-        cmp.b	#$82,d0					; Terrible Beat         CBD8
+        cmp.b	#$82,d0					; Terrible Beat         set@ $CBD8
         beq     play_track_2
-        cmp.b	#$83,d0					; Round Clear           A5D2
+        cmp.b	#$83,d0					; Round Clear           set@ $A5D2
         beq     play_track_3
-        cmp.b	#$84,d0					; Make Me Dance         
+        cmp.b	#$84,d0					; Make Me Dance         set@ $CBD8
         beq     play_track_4
-        cmp.b	#$85,d0					; Over the Bay          
+        cmp.b	#$85,d0					; Over the Bay          set@ $CBD8
         beq     play_track_5
-        cmp.b	#$86,d0					; China Town            
+        cmp.b	#$86,d0					; China Town            set@ $CBD8
         beq     play_track_6
-        cmp.b	#$87,d0					; Run or Die            
+        cmp.b	#$87,d0					; Run or Die            set@ $CBD8
         beq     play_track_7
-        cmp.b	#$88,d0					; Like a Wind           
+        cmp.b	#$88,d0					; Like a Wind           set@ $CBD8
         beq     play_track_8
-        cmp.b	#$89,d0					; Labyrinth             
+        cmp.b	#$89,d0					; Labyrinth             set@ $CBD8
         beq     play_track_9
-        cmp.b	#$8A,d0					; Sunrise Blvd.         
+        cmp.b	#$8A,d0					; Sunrise Blvd.         set@ $CBD8
         beq     play_track_10
-        cmp.b	#$8B,d0					; The Dark City         
+        cmp.b	#$8B,d0					; The Dark City         set@ $CBD8
         beq     play_track_11
-        cmp.b	#$8C,d0					; Ninja Step            
+        cmp.b	#$8C,d0					; Ninja Step            set@ $CBD8
         beq     play_track_12
-        cmp.b	#$8D,d0					; Long Distance (story) A40C
+        cmp.b	#$8D,d0					; Long Distance (story) set@ $A40C
         beq     play_track_13
-        cmp.b	#$8E,d0					; Failure               A11C
+        cmp.b	#$8E,d0					; Failure               set@ $A11C
         beq     play_track_14
-        cmp.b	#$8F,d0					; Silence Night         
+        cmp.b	#$8F,d0					; Silence Night         set@ $CBD8 ?
         beq     play_track_15
-        cmp.b	#$90,d0					; My Lover              
+        cmp.b	#$90,d0					; My Lover              set@ $CBD8
         beq     play_track_16
-        cmp.b	#$91,d0					; Game Over             A96E
+        cmp.b	#$91,d0					; Game Over             set@ $A96E
         beq     play_track_17
-        cmp.b	#$92,d0					; The Ninja Master      
+        cmp.b	#$92,d0					; The Ninja Master      set@ $CBD8
         beq     play_track_18
-        cmp.b	#$93,d0					; Opening               9682
+        cmp.b	#$93,d0					; Opening               set@ $9682
         beq     play_track_19
         rts
 
 
-play_track_1								
-        move.w	#($1100|1),MCD_CMD			; send cmd: play track #1, no loop
+play_track_1						; The Shinobi		
+        move.w	#($1200|1),MCD_CMD			; send cmd: play track #1, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_2							
-        move.w	#($1100|2),MCD_CMD			; send cmd: play track #2, no loop
+play_track_2						; Terrible Beat
+        move.w	#($1200|2),MCD_CMD			; send cmd: play track #2, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_3							
+play_track_3						; Round Clear
         move.w	#($1100|3),MCD_CMD			; send cmd: play track #3, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_4							
-        move.w	#($1100|4),MCD_CMD			; send cmd: play track #4, no loop
+play_track_4						; Make Me Dance    
+        move.w	#($1200|4),MCD_CMD			; send cmd: play track #4, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_5							
-        move.w	#($1100|5),MCD_CMD			; send cmd: play track #5, no loop
+play_track_5						; Over the Bay   
+        move.w	#($1200|5),MCD_CMD			; send cmd: play track #5, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_6							
-        move.w	#($1100|6),MCD_CMD			; send cmd: play track #6, no loop
+play_track_6						; China Town        
+        move.w	#($1200|6),MCD_CMD			; send cmd: play track #6, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_7							
-        move.w	#($1100|7),MCD_CMD			; send cmd: play track #7, no loop
+play_track_7						; Run or Die           
+        move.w	#($1200|7),MCD_CMD			; send cmd: play track #7, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_8						
-        move.w	#($1100|8),MCD_CMD			; send cmd: play track #8, no loop
+play_track_8						; Like a Wind           
+        move.w	#($1200|8),MCD_CMD			; send cmd: play track #8, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_9								
-        move.w	#($1100|9),MCD_CMD			; send cmd: play track #9, no loop
+play_track_9						; Labyrinth     
+        move.w	#($1200|9),MCD_CMD			; send cmd: play track #9, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_10						
-        move.w	#($1100|10),MCD_CMD			; send cmd: play track #10, no loop
+play_track_10						; Sunrise Blvd.   
+        move.w	#($1200|10),MCD_CMD			; send cmd: play track #10, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_11							
-        move.w	#($1100|11),MCD_CMD			; send cmd: play track #11, no loop
+play_track_11						; The Dark City   
+        move.w	#($1200|11),MCD_CMD			; send cmd: play track #11, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_12						
-        move.w	#($1100|12),MCD_CMD			; send cmd: play track #12, no loop
+play_track_12						; Ninja Step     
+        move.w	#($1200|12),MCD_CMD			; send cmd: play track #12, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_13							
-        move.w	#($1100|13),MCD_CMD			; send cmd: play track #13, no loop
+play_track_13						; Long Distance (story)
+        move.w	#($1200|13),MCD_CMD			; send cmd: play track #13, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_14
+play_track_14                                           ; Failure
         move.w	#($1100|14),MCD_CMD			; send cmd: play track #14, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_15
+play_track_15                                           ; Silence Night
         move.w	#($1100|15),MCD_CMD			; send cmd: play track #15, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_16
-        move.w	#($1100|16),MCD_CMD			; send cmd: play track #16, no loop
+play_track_16                                           ; My Lover 
+        move.w	#($1200|16),MCD_CMD			; send cmd: play track #16, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_17
+play_track_17                                           ; Game Over
         move.w	#($1100|17),MCD_CMD			; send cmd: play track #17, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_18
-        move.w	#($1100|18),MCD_CMD			; send cmd: play track #18, no loop
+play_track_18                                           ; The Ninja Master 
+        move.w	#($1200|18),MCD_CMD			; send cmd: play track #18, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
-play_track_19
+play_track_19                                           ; Opening
         move.w	#($1100|19),MCD_CMD			; send cmd: play track #19, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
         rts
