@@ -44,8 +44,8 @@ Game
         rts
         
         org     $78FAE                          ; StopAllSound function
-        ;jsr     msuHijack_StopAllSound
-        ;nop
+        jsr     msuHijack_StopAllSound
+        nop
 
         
         org     $9484
