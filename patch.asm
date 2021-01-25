@@ -1,4 +1,4 @@
-PRODUCTION  set 1                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
+PRODUCTION  set 0                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
 CHEAT       set 1                           ; set to 1 for cheat enabled
 DEBUG_MENU  set 0                           ; set to 1 for debug menu enabled
 
@@ -34,27 +34,32 @@ MCD_CMD_CK      EQU $A1201F
         org     $1A4                            ; ROM_END
         dc.l    $000FFFFF                       ; Overwrite with 8 MBIT size
 
-        org     $206
+        org     $206                            ; only for label
 Game
 
-        org     $27E
+        org     $924E
         jsr     msuSega
 
-        org     $78ED6                          ; mute music by aborting PlayMusic function
+        org     $6A980                          ; only for label
+ret_msuSega
+
+        org     $78EDE                          ; mute music by aborting PlayMusic function
         rts
         
         org     $78FAE                          ; StopAllSound function
-        jsr     msuHijack_StopAllSound
-        nop
+        ;jsr     msuHijack_StopAllSound         ; doesn't work because of how this SMPS driver works
+        ;nop
 
+        org     $87C0                           ; Mute music on optionscreen
+        jsr     msuHijack_StopOptions           ; Thanks to PepilloPEV and neodev for hinting the location!
         
         org     $9484
         jmp     msuHijack_SoundTest
 
-        org     $948A
+        org     $948A                           ; only for label
 retFromHijack
 
-        org     $9494
+        org     $9494                           ; only for label
 sub_9494
         
         org     $9682
@@ -98,9 +103,19 @@ msuHijack_Levels
         move.b  (a6)+,d0
         rts
 
+msuHijack_StopOptions
+        moveq   #0,d1
+        move.w  #$3D,d7
+        jsr     msuStop
+        rts
+
 msuHijack_StopAllSound
         move.b  #$2B,d0
         move.b  #$80,d1
+        cmpi.b  #00,($F708).w                   ; if this RAM location is 00 and does not contain a SoundID, stop the music
+        beq     jmp_msuStop
+        rts
+jmp_msuStop
         jsr msuStop
         rts
 
@@ -296,9 +311,9 @@ play_track_19                                           ; Opening
         rts
 
 msuSega
-        move.w  #8,($FF26).w
         move.w	#($1100|20),MCD_CMD			; send cmd: play track #19, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
+        jsr     ret_msuSega
         rts
 
 msuStop

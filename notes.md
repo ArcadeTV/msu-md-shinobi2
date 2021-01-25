@@ -39,7 +39,7 @@ PlaySoundID:
 ```
 
 Find sound cmd:
-`wp ffF708,1,w,wpdata >= 0xD0 && wpdata < 0xD7`
+`wp ffF708,1,w,wpdata >= 0xD0 && wpdata <= 0xD7`
 
 Find sound calls:
 `wp ffF708,1,w,wpdata > 0x80 && wpdata < 0x94`
