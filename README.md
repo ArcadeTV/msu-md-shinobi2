@@ -32,6 +32,7 @@ Date:          2021-01-23
 
 Category:      Romhack / Music
 Thanks:        RodrigoMacck (idea for hack), SCD (improvement hack), BillyTime! Games (jump hack),
+               PepilloPEV (MD student), neodev (location for stopping music in option menu), 
                Dustin O'Dell (asm tutor), Krikzz (everdrive creator), Conn (mental coach)
 
 Soundpacks:    Arranged OST by coNsPirAcy83:  
