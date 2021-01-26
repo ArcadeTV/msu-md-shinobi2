@@ -1,5 +1,5 @@
-PRODUCTION  set 0                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
-CHEAT       set 1                           ; set to 1 for cheat enabled
+PRODUCTION  set 1                           ; set to 0 for GENS compatibility (for debugging) and 1 when ready
+CHEAT       set 0                           ; set to 1 for cheat enabled
 DEBUG_MENU  set 0                           ; set to 1 for debug menu enabled
 
 ; I/O
@@ -72,7 +72,8 @@ sub_9494
         jsr     play_track_3                    ; Round Clear
         org     $A96E
         jsr     play_track_17                   ; Game Over
-
+        org     $F96E
+        jsr     play_track_16                   ; My Lover
 
         org     $CBD8
         jsr     msuHijack_Levels
@@ -97,21 +98,21 @@ MSUDRV
         align   2
 
 msuHijack_Levels
-        move.b  (a6)+,($F708).w
-        move.b  ($F708).w,d0
+        move.b  (a6)+,($F708).w                 ; original bypassed code
+        move.b  ($F708).w,d0                    ; original bypassed code
         jsr     findAndPlayTrack
-        move.b  (a6)+,d0
+        move.b  (a6)+,d0                        ; original bypassed code
         rts
 
 msuHijack_StopOptions
-        moveq   #0,d1
-        move.w  #$3D,d7
+        moveq   #0,d1                           ; original bypassed code
+        move.w  #$3D,d7                         ; original bypassed code
         jsr     msuStop
         rts
 
 msuHijack_StopAllSound
-        move.b  #$2B,d0
-        move.b  #$80,d1
+        move.b  #$2B,d0                         ; original bypassed code
+        move.b  #$80,d1                         ; original bypassed code
         cmpi.b  #00,($F708).w                   ; if this RAM location is 00 and does not contain a SoundID, stop the music
         beq     jmp_msuStop
         rts
@@ -120,16 +121,16 @@ jmp_msuStop
         rts
 
 msuHijack_Fade
-        move.b  #$28,($F702).l
+        move.b  #$28,($F702).l                  ; original bypassed code
         jsr     msuFade
         rts
 
 msuHijack_SoundTest
-        beq.w   jmp_sub_9494
-        move.w  ($FF32).w,d0
-        move.b  soundIDs(pc,d0.w),d0
+        beq.w   jmp_sub_9494                    ; original bypassed code with custom jmp label
+        move.w  ($FF32).w,d0                    ; original bypassed code
+        move.b  soundIDs(pc,d0.w),d0            ; original bypassed code with custom array
         jsr     findAndPlayTrack
-        move.w  ($FF32).w,d0
+        move.w  ($FF32).w,d0                    ; original bypassed code
         jmp     retFromHijack
 jmp_sub_9494
         jmp     sub_9494
@@ -222,7 +223,7 @@ findAndPlayTrack
         beq     play_track_14
         cmp.b	#$8F,d0					; Silence Night         set@ $CBD8 ?
         beq     play_track_15
-        cmp.b	#$90,d0					; My Lover              set@ $CBD8
+        cmp.b	#$90,d0					; My Lover              set@ $F96A
         beq     play_track_16
         cmp.b	#$91,d0					; Game Over             set@ $A96E
         beq     play_track_17
@@ -296,6 +297,7 @@ play_track_15                                           ; Silence Night
 play_track_16                                           ; My Lover 
         move.w	#($1200|16),MCD_CMD			; send cmd: play track #16, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
+        lea     ($F9FE).l,a5                            ; original bypassed code
         rts
 play_track_17                                           ; Game Over
         move.w	#($1100|17),MCD_CMD			; send cmd: play track #17, no loop
