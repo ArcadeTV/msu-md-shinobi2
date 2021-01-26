@@ -1,5 +1,8 @@
 ## Changelog 
 
+## v1 [2021-01-26]
+* fixed both ending music tracks not playing
+
 ## v1 [2021-01-25]
 * fixed stop music for option menu (Thanks to PepilloPEV and neodev)
 
