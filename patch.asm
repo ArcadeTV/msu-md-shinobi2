@@ -74,6 +74,8 @@ sub_9494
         jsr     play_track_17                   ; Game Over
         org     $F96E
         jsr     play_track_16                   ; My Lover
+        org     $F982
+        jsr     play_track_15                   ; Silence Night
 
         org     $CBD8
         jsr     msuHijack_Levels
@@ -221,9 +223,9 @@ findAndPlayTrack
         beq     play_track_13
         cmp.b	#$8E,d0					; Failure               set@ $A11C
         beq     play_track_14
-        cmp.b	#$8F,d0					; Silence Night         set@ $CBD8 ?
+        cmp.b	#$8F,d0					; Silence Night         set@ $F97E ?
         beq     play_track_15
-        cmp.b	#$90,d0					; My Lover              set@ $F96A
+        cmp.b	#$90,d0					; My Lover              set@ $F96A ?
         beq     play_track_16
         cmp.b	#$91,d0					; Game Over             set@ $A96E
         beq     play_track_17
@@ -293,6 +295,7 @@ play_track_14                                           ; Failure
 play_track_15                                           ; Silence Night
         move.w	#($1100|15),MCD_CMD			; send cmd: play track #15, no loop
         addq.b	#1,MCD_CMD_CK				; Increment command clock
+        lea     ($FA1E).l,a5                            ; original bypassed code
         rts
 play_track_16                                           ; My Lover 
         move.w	#($1200|16),MCD_CMD			; send cmd: play track #16, no loop
